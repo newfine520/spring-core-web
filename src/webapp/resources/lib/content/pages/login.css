@@ -1,0 +1,144 @@
+body {
+    width: 100%;
+    height: 100%;
+    background: url(../../images/pexels-photo-large-2.png) no-repeat center center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.container-bg {
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+}
+
+.center {
+    padding-top: 100px;
+    width: 500px;
+    height: 60%;
+    margin: 0 auto;
+}
+
+.center-top {
+    width: 499px;
+    height: 249px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.center-footer {
+    width: 499px;
+    height: 345px;
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 0px 0px 5px 5px;
+}
+
+.center-text1 {
+    margin-top: 50px;
+    width: 400px;
+    height: 40px;
+    padding: 5px;
+    margin-left: 10%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #a1a2a2;
+    background: url(../../images/user.png) no-repeat 370px;
+}
+
+    .center-text1:hover {
+        border: 1px solid #3888df;
+    }
+
+.center-text2:hover {
+    border: 1px solid #3888df;
+}
+
+.center-text2 {
+    margin-top: 10px;
+    width: 400px;
+    height: 40px;
+    padding: 5px;
+    margin-left: 10%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #a1a2a2;
+    background: url(../../images/password.png) no-repeat 370px;
+}
+
+
+
+label {
+    display: inline;
+}
+
+.regular-checkbox {
+    display: none;
+    margin-top: 5px;
+}
+
+    .regular-checkbox + label {
+        margin-left: 10%;
+        background-color: #d8dbdf;
+        border: 1px solid #cacece;
+        padding: 9px;
+        border-radius: 3px;
+        display: inline-block;
+        position: relative;
+    }
+
+
+
+    .regular-checkbox:checked + label {
+        background-color: #d8dbdf;
+        border: 1px solid #adb8c0;
+        color: #3888df;
+    }
+
+        .regular-checkbox:checked + label:after {
+            content: '\2714';
+            position: absolute;
+            top: -3px;
+            left: 1px;
+            color: #3888df;
+        }
+
+.text1 {
+    display: block;
+    margin-top: -30px;
+    margin-left: 80px;
+    font-family: "微软雅黑";
+    color: #666666;
+    font-size: 15px;
+    padding: 0;
+}
+
+.logon {
+    display: block;
+    width: 400px;
+    margin-left: 10%;
+    margin-top: 10px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #4298f6;
+    border-radius: 5px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 25px;
+    margin-top: 30px;
+    border: none;
+    cursor: pointer;
+    opacity: 1;
+}

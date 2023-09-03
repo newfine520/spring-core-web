@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+    http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+    <!--<bean id="personId" name="personName" class="com.itqf.spring.bean.Person"/>-->
+
+    <!--扫描包设置-->
+    <context:component-scan base-package="com.itqf.spring.*">
+    </context:component-scan>
+    <!--    引入注解解析器-->
+    <context:annotation-config></context:annotation-config>
+    <!--视图解析器-->
+
+
+<!--    <import resource="classpath:spring-security.xml"></import>-->
+
+    <!--加载配置文件-->
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driver}"></property>
+        <property name="jdbcUrl" value="${url}"></property>
+        <property name="user" value="${names}"></property>
+        <property name="password" value="${password}"></property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.itqf.spring.mapper"></property>
+    </bean>
+
+    <!--20211121文件上传设置-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"></property>
+        <!--上传文件大小限制10M（单位：字节） -->
+        <property name="maxUploadSize" value="10485760"></property>
+        <property name="maxInMemorySize" value="40960"></property>
+    </bean>
+    <bean id="handleContractInfoAlert" class="com.itqf.spring.bean.ContractInfoHandler"></bean>
+    <rabbit:connection-factory id="connectionFactory"
+                               host="${rabbitmq.host}"
+                               port="${rabbitmq.port}"
+                               username="${rabbitmq.username}"
+                               password="${rabbitmq.password}"/>
+    <rabbit:admin connection-factory="connectionFactory"/>
+    <rabbit:queue id="spittleAlertQueue" name="spittle.alerts"/>
+    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory" queue="spittle.alerts"/>
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="handleContractInfoAlert" method="handleContractInfoAlert" queue-names="spittle.alerts"/>
+    </rabbit:listener-container>
+    <!--20211128如果引用第三方jar包，肯定是不能直接使用常用注解@Controller、@Service、@Repository、@Component将类的实例注入到spring容器中。需要在spring的xml文件中配置需要导入的bean-->
+    <bean class="okhttp3.OkHttpClient"></bean>
+    <bean class="com.itqf.spring.postprocessor.MyBeanPostProcessor"></bean>
+    <bean id="myAdvice" name="myAdvice" class="com.itqf.spring.bean.MyAdvice"></bean>
+        <aop:config>
+            <aop:aspect ref="myAdvice">
+                <aop:pointcut id="pc"  expression="execution(* com.itqf.spring.service.impl.ConsumerServiceImpl.*(..))"></aop:pointcut>
+                <aop:before method="beforeConsumerService" pointcut-ref="pc"></aop:before>
+                <aop:after-returning method="afterReturningConsumerService" pointcut-ref="pc"></aop:after-returning>
+                <aop:around method="aroundConsumerService" pointcut-ref="pc"></aop:around>
+                <aop:after-throwing method="afterThrowingConsumerService" pointcut-ref="pc"></aop:after-throwing>
+                <aop:after method="afterConsumerService" pointcut-ref="pc"></aop:after>
+            </aop:aspect>
+        </aop:config>
+
+        <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+</beans>

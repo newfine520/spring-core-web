@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+}
+
+.el-loading-mask {
+    background-color: rgba(0,0,0,0.7)!important;
+}
+p {
+    margin: 0;
+    padding: 4px;
+    font-weight: normal;
+}
+span {
+  font-weight: normal;
+}
+.pos-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: white;
+}
+
+.el-loading-mask {
+  z-index: 9999 !important;
+}
+.el-col {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.el-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+/* .el-col-4 {
+  width: 20%;
+} */
+.el-range-editor.el-input__inner {
+  height: 32px;
+  line-height: 32px;
+}
+.el-form-item__content {
+  line-height: 32px;
+}
+.el-date-editor .el-range__icon {
+  line-height: 25px
+}
+.el-date-editor .el-range-separator {
+  line-height: 25px;
+}
+.el-form--label-left .el-form-item__label{
+  height: 32px;
+  line-height: 15px;
+  padding: 0;
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+  padding-top: 4px;
+}
+.el-form-item {
+  margin-bottom: 8px;
+}
+.el-input--suffix .el-input__inner {
+  height: 32px !important;
+  line-height: 32px;
+}
+.el-input__icon {
+  line-height: 32px;
+}
+.el-select{
+  width: 100%;
+}
+.el-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+.el-button {
+  height: 32px;
+  line-height: 32px !important;
+  padding: 0 8px !important;
+  font-weight: normal;
+}
+.el-input__inner{
+  height: 32px;
+  line-height: 32px;
+}
+.el-pagination {
+  padding: 20px 0;
+  width: 100%;
+  text-align: right;
+}
+.el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
+  padding: 0;
+  margin: 0;
+  background: white;
+  border: 1px solid #D8D8D8;
+  height: 32px;
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active{
+  background-color: #F2F2F2;
+  color: black;
+}
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+  color: black;
+  background-color: #F2F2F2;
+}
+.el-table td, .el-table th {
+  padding: 8px !important;
+}
+
+
+.pos-header {
+  flex: 0 0 auto;
+  padding: 8px;
+}
+.header-title-pos {
+  font-weight: bold;
+}
+.header-setting {
+  font-weight: bold;
+}
+.header-sift {
+  padding: 8px;
+  border: 1px solid #F0F0F0;
+  border-radius: 4px;
+}
+.pos-tolerance {
+    padding: 4px;
+    border: 1px solid #F0F0F0;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tolerance-group {
+    margin: 0 4px 8px 0;
+}
+.tolerance-btn{
+  border-color: transparent;
+  width: 150px;
+}
+.tolerance-btn-default {
+  background: #F0F0F0;
+  color: black;
+}
+.tolerance-btn-select {
+  background: #00AC8D;
+  color: white;
+}
+.export-excel {
+  width: 100px;
+  width: 100px;
+}
+.export-csv {
+  width: 100px;
+}
+.dialog-btn {
+  width: 80px;
+}
+.dialog-btn-clear {
+  background: white;
+  color: #00AC8D;
+  border-color: #00AC8D;
+}
+.dialog-btn-group {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #F0F0F0;
+  padding: 4px 0;
+  border-radius: 4px;
+}
+
+
+.pos-main {
+  flex-grow: 1;
+  padding: 0 8px 8px;
+}
+
+.el-col-4 {
+  width: 20%;
+}

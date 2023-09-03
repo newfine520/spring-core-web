@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--    <bean id="personId" class="com.itqf.spring.bean.Person" name="personName">-->
+<!--        <property name="name">-->
+<!--            <value>奔驰E级</value>-->
+<!--        </property>-->
+<!--        <property name="age">-->
+<!--            <value>100</value>-->
+<!--        </property>-->
+<!--        <property name="car" ref="car">-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    <bean name="car" class="com.itqf.spring.bean.Car">-->
+<!--        <property name="name" value="MINI"></property>-->
+<!--        <property name="color" value="灰色" ></property>-->
+<!--    </bean>-->
+
+    <!---->
+<!--    <bean name="personName" class="com.itqf.spring.bean.Person" >-->
+<!--        <constructor-arg name="name" value="1000" index="1" type="java.lang.Integer"/>-->
+<!--        <constructor-arg name="car"  ref="car" index="0"/>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; 构造函数car时候引入&ndash;&gt;-->
+<!--    <bean name="car" class="com.itqf.spring.bean.Car">-->
+<!--        <property name="name" value="mime"/>-->
+<!--        <property name="color" value="白色"/>-->
+<!--    </bean>-->
+
+<!--    <bean name="personName" class="com.itqf.spring.bean.Person" p:name="人名" p:age="11" p:car-ref="car"></bean>-->
+<!--    <bean name="car" class="com.itqf.spring.bean.Car">-->
+<!--    <property name="name" value="mimetype"></property>-->
+<!--    <property name="color" value="红色"></property>-->
+<!--    </bean>-->
+
+<!--    <bean name="car" class="com.itqf.spring.bean.Car">-->
+<!--        <property name="name" value="spel-mimi"/>-->
+<!--        <property name="color" value="spel-白色"/>-->
+<!--    </bean>-->
+<!--    <bean name="person1" class="com.itqf.spring.bean.Person" p:car-ref="car">-->
+
+<!--    <bean name="person1" class="com.itqf.spring.bean.Person">-->
+<!--     <property name="name" value="张三丰"/>-->
+<!--      &lt;!&ndash;<property name="age" value="#{person.age}"/>&ndash;&gt;-->
+<!--  </bean>-->
+
+<!--  <bean name="car" class="com.itqf.spring.bean.Car">-->
+<!--       <property name="name" value="保时捷"/>-->
+<!--     <property name="color" value="红色" />-->
+<!--  </bean>-->
+
+
+<!--    <bean name="testColl" class="com.itqf.spring.bean.TestCollection">-->
+
+<!--        &lt;!&ndash; 数组变量注入 &ndash;&gt;-->
+<!--        <property name="arrs">-->
+<!--            <list>-->
+<!--                <value>数组1</value>-->
+<!--                &lt;!&ndash;引入其他类型&ndash;&gt;-->
+<!--                <ref bean="car"/>-->
+<!--            </list>-->
+<!--        </property>-->
+
+<!--        &lt;!&ndash; 集合变量赋值&ndash;&gt;-->
+<!--        <property name="list">-->
+<!--            <list>-->
+<!--                <value>集合1</value>-->
+<!--                &lt;!&ndash;集合变量内部包含集合&ndash;&gt;-->
+<!--                <list>-->
+<!--                    <value>集合中的集合1</value>-->
+<!--                    <value>集合中的集合2</value>-->
+<!--                    <value>集合中的集合3</value>-->
+<!--                </list>-->
+<!--                <ref bean="car" />-->
+<!--            </list>-->
+<!--        </property>-->
+
+<!--        &lt;!&ndash;map赋值 &ndash;&gt;-->
+<!--        <property name="map">-->
+<!--            <map>-->
+<!--                <entry key="car" value-ref="car" />-->
+<!--                <entry key="name" value="保时捷" />-->
+<!--                <entry key="age"  value="11"/>-->
+<!--            </map>-->
+
+<!--        </property>-->
+
+<!--        &lt;!&ndash; properties赋值 &ndash;&gt;-->
+<!--        <property name="properties">-->
+<!--            <props>-->
+<!--                <prop key="name">pro1</prop>-->
+<!--                <prop key="age">111</prop>-->
+<!--            </props>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+
+    <bean id="userService" class="com.itqf.spring.service.impl.ConsumerServiceImpl">
+        <property name="UserDao" ref="userDao"></property>
+    </bean>
+    <bean id="userDao" class="com.itqf.spring.dao.UserDao.impl.UserDaoImpl"></bean>
+
+    <!--配置通知对象-->
+    <bean id="myAdvice" name="myAdvice" class="com.itqf.spring.bean.MyAdvice"></bean>
+    <!--配置将增强织入目标对象-->
+    <!---
+    如何形容一个方法？？？
+    1：方法修饰符（可以省略，一般都不写）
+    2：方法的返回值
+    3：方法名称
+    4：方法的参数
+
+    1 2 3 4
+    1：修饰符 public/private/* 可忽略
+    2：返回值 String/../* *表示所有返回类型
+    3：全限定类名（可以用..省略多级包路径）.方法名称
+    4：（..）表示任何参数
+
+    com.itqf.spring.service.impl.ConsumerServiceImpl findUsers():
+    * com..impl.*Impl.*(..)
+
+
+    -->
+<!--    <aop:config>-->
+<!--        <aop:aspect ref="myAdvice">-->
+<!--            <aop:pointcut id="pc"  expression="execution(* com.itqf.spring.service.impl.ConsumerServiceImpl.*(..))"></aop:pointcut>-->
+<!--            <aop:before method="beforeConsumerService" pointcut-ref="pc"></aop:before>-->
+<!--            <aop:after-returning method="afterReturningConsumerService" pointcut-ref="pc"></aop:after-returning>-->
+<!--            <aop:around method="aroundConsumerService" pointcut-ref="pc"></aop:around>-->
+<!--            <aop:after-throwing method="afterThrowingConsumerService" pointcut-ref="pc"></aop:after-throwing>-->
+<!--            <aop:after method="afterConsumerService" pointcut-ref="pc"></aop:after>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+<!--    <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>-->
+
+</beans>

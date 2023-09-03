@@ -1,0 +1,218 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>管理后台首页</title>-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <link th:href="@{resources/lib/bootstrap-3.3.1-dist/css/bootstrap.css}" rel="stylesheet">-->
+<!--    &lt;!&ndash;[if lt IE 9]>-->
+<!--    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+<!--    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+<!--    <![endif]&ndash;&gt;-->
+<!--    <style type="text/css">-->
+<!--        #container {-->
+<!--            width: 858px;-->
+<!--            height: 400px;-->
+<!--            position: absolute;-->
+<!--            top: 50%;-->
+<!--            left: 50%;-->
+<!--            margin-left: -429px;-->
+<!--            margin-top: -190px;-->
+<!--        }-->
+<!--        .form-group{margin-bottom:6px;}-->
+<!--        form{margin-bottom:0;}-->
+<!--        label{margin-bottom:2px;}-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body style="background:#2E3E4E;">-->
+
+<!--<div id="container">-->
+<!--    <div></div>-->
+<!--    <div class="panel panel-default" style="border:none;">-->
+<!--        <div class="panel-body">-->
+<!--            <div class="pull-left">-->
+<!--               欢迎来到首页～-->
+<!--            </div>-->
+<!--            <div class="pull-right" style="width:320px;">-->
+<!--                <div style="margin:0 0 15px;font-size:40px;padding:20px 0 0 10px;">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script src="/resources/lib/jquery/jquery-1.11.0.min.js"></script>-->
+<!--<script src="/resources/lib/bootstrap-3.3.1-dist/js/bootstrap.min.js"></script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width">
+    <title th:text="管理平台"></title>
+    <link th:href="@{resources/lib/plugins/layer/skin/layer.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/content/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/content/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/content/style.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/content/global.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/plugins/datepicker/datepicker3.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/plugins/toastr/toastr.min.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/plugins/select2/select2.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/plugins/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/plugins/webuploader/webuploader.css}" rel="stylesheet">
+    <link th:href="favicon.ico" rel="shortcut icon">
+    <link th:href="@{resources/lib/content/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{resources/lib/content/animate.css}" rel="stylesheet">
+    <style>
+        .nav > li {
+            border-bottom: none;
+        }
+
+        .templete {
+            color: red;
+        }
+
+        .img-circle {
+            width: 80px;
+            height: 80px;
+        }
+    </style>
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i></div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span><img alt="image" class="img-circle" th:src="@{resources/images/logo.png}" /></span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                <span class="block m-t-xs" sec:authentication="name"><strong class="font-bold"></strong></span>
+                                    <span class="text-muted text-xs block"><b class="caret"></b></span>
+                                </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li>
+                                <a class="J_menuItem" data-target="#modal-edit-passwrd" data-toggle="modal">
+                                    修改密码
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/Account/LogOff">安全退出</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        SFA
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg ">
+        <div class="row J_mainContent" id="content-main">
+            <!--      @RenderBody()-->
+            <!--      @Html.Partial("_LoginPartial")-->
+            <!--      @Html.Partial("_EditPasswordPartial")-->
+        </div>
+    </div>
+</div>
+<script src="/resources/lib/scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="/resources/lib/scripts/bootstrap.js"></script>
+<script src="/resources/lib/scripts/jquery-ui-1.8.24.js"></script>
+<script src="/resources/lib/scripts/jquery.validate.js" type="text/javascript"></script>
+<script src="/resources/lib/scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
+<script src="/resources/lib/scripts/jquery.validate.unobtrusive.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $.SubAjax({
+            type: 'post',
+            url: '/loadmenu',
+            success: function (data) {
+                if (data.code==0) {
+                    data = data.data;
+                    var mo = "";
+                    $.each(data, function (index, value, array) {
+                        if (mo != value.moduleName) {
+                            mo = value.moduleName;
+                            $("#side-menu").append("<li id=" + mo + "></li>");
+                            $("#" + mo).append("<a href='#'><i class='fa fa-home'></i><span class='nav-label'>" + mo + "</span><span class='fa arrow'></span></a>")
+                            $("#" + mo).append("<ul id=ul" + mo + " class='nav nav-second-level'><ul>");
+                        }
+                        $("#ul" + mo).append("<li><a href='" + value.url + "'>" + value.urlName + "</a></li>");
+                    });
+                } else {
+                    $.ShowMessage("error", data.msg)
+                }
+            }
+        });
+    })
+    //
+    //
+    //   var roleName = '@(((SFA.Service.UserService.Output.UserDescriptOutput)ViewData["CurrentUser"]).RoleNameEns)';
+    //   var roles = roleName.split(',');
+    //   $.each($(".btn,div,li"), function (index, value) {
+    //     if ($(this).data('role') && $(this).data('role') != "") {
+    //       var btnRoleObj = $(this);
+    //       var btnRole = $(this).data('role').toLowerCase();
+    //       $.each(roles, function (i, v) {
+    //         v = v.toLowerCase();
+    //         btnRoleObj.hide();
+    //         if (btnRole.indexOf(v) > -1) {
+    //           btnRoleObj.show();
+    //           return;
+    //         }
+    //
+    //       })
+    //     }
+    //   })
+    //   // InitHeight();
+    // })
+    // function RenderRoleButton() {
+    //   var roleName = '@(((SFA.Service.UserService.Output.UserDescriptOutput)ViewData["CurrentUser"]).RoleNameEns)';
+    //   var roles = roleName.split(',');
+    //   $.each($("a"), function (index, value) {
+    //     if ($(this).data('role') && $(this).data('role') != "") {
+    //       var btnRoleObj = $(this);
+    //       var btnRole = $(this).data('role').toLowerCase();
+    //       $.each(roles, function (i, v) {
+    //         v = v.toLowerCase();
+    //         btnRoleObj.hide();
+    //         if (btnRole.indexOf(v) > -1) {
+    //           btnRoleObj.show();
+    //           return false;
+    //         }
+    //       })
+    //     }
+    //   })
+    //   $('.tooltip-show').mouseover(function () {
+    //     $(this).tooltip('show');
+    //   })
+    // }
+</script>
+<script src="/resources/lib/scripts/Plugins/jquery.metisMenu.js" type="text/javascript"></script>
+<script src="/resources/lib/plugins/layer/layer.min.js" type="text/javascript"></script>
+<script src="/resources/lib/plugins/slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/resources/lib/scripts/Plugins/contabs.js" type="text/javascript"></script>
+<script src="/resources/lib/scripts/Plugins/hplus.js" type="text/javascript"></script>
+<script src="/resources/lib/scripts/jquery.extend.js" type="text/javascript"></script>
+<script src="/resources/lib/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/resources/lib/plugins/select2/select2.js"></script>
+<script src="/resources/lib/scripts/pages/EnumData.js" type="text/javascript"></script>
+<script type="text/javascript" src="/resources/lib/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/resources/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="/resources/lib/plugins/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="/resources/lib/plugins/webuploader/webuploader-sfa.js"></script>
+<script type="text/javascript" src="/resources/lib/plugins/underscore-1.8.3.js"></script>
+<script type="text/javascript" src="/resources/lib/plugins/juicer-min.js"></script>
+<script type="text/javascript" src="/resources/lib/scripts/pages/login.js"></script>
+<script type="text/javascript" src="/resources/lib/scripts/ProvinceCity.js"></script>
+<script src="/resources/lib/scripts/sfa-common.js"></script>
+</body>
+</html>

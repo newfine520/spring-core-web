@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+
+<!--  20211114  释放静态资源-->
+<!--    namespace-->
+<!--    定义一个namespace，把所有需要权限控制的文件都通过这个namespace访问，spring security 也只对这个namespace拦截-->
+
+<!--    security="none"-->
+<!--    也可以在spring security里面设置，把不需要权限的资源的security设置为none-->
+
+<!--    demo：-->
+
+<!--    <security:http security="none" pattern="*.js"   />-->
+
+<!--    access="anonymous"-->
+<!--    也可以在拦截的时候，权限设置为访客-->
+
+<!--    demo:-->
+
+<!--    <security:intercept-url pattern="*.js" access="ANONYMOUS"/>-->
+    <security:http pattern="/resources/**" security="none"/>
+
+
+<!--    &lt;!&ndash; 配置 Spring Security &ndash;&gt;-->
+    <security:http auto-config="true" use-expressions="true">
+
+        <!--允许匿名访问-->
+        <security:intercept-url pattern="/syslogin" access="permitAll()"/>
+
+        <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER')"></security:intercept-url>
+
+        <security:form-login
+                login-page="/syslogin"
+                login-processing-url="/login"
+                default-target-url="/index"
+                authentication-failure-url="/failure"
+                always-use-default-target="true"
+        />
+  <security:csrf disabled="true"/>
+    </security:http>
+    <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder" />
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="userServiceImpl">
+            <!--
+                配置用户信息， noop:SpringSecurity中默认 密码验证是要加密的， noop表示不加密
+             -->
+<!--            <security:user-service>-->
+<!--                <security:user name="zhang" authorities="ROLE_USER" password="{noop}123"></security:user>-->
+<!--                <security:user name="lisi" authorities="ROLE_USER" password="{noop}456"></security:user>-->
+<!--            </security:user-service>-->
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+</beans>

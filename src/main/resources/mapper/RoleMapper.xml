@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itqf.spring.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.itqf.spring.entity.Role">
+        <result column="id" property="id"></result>
+        <result column="name_zh" property="nameZh"></result>
+        <result column="name_en" property="nameEn"></result>
+        <result column="sys_name" property="sysName"></result>
+        <result column="remark" property="remark"></result>
+        <result column="is_delete" property="isDelete"></result>
+        <result column="rolecode" property="roleCode"></result>
+        <result column="is_frozen" property="isFrozen"></result>
+    </resultMap>
+    <select id="queryRole"  resultMap="BaseResultMap">
+        select id,name_zh,name_en,sys_name,remark,is_delete,rolecode,is_frozen from role where is_delete=0
+    </select>
+</mapper>

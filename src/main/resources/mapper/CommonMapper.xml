@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itqf.spring.mapper.CommonMapper">
+    <resultMap id="BaseResultMap" type="com.itqf.spring.entity.WebMenu">
+        <result column="module_name" property="moduleName"></result>
+        <result column="menu_name" property="urlName"></result>
+        <result column="msort" property="urlSort"></result>
+        <result column="sort" property="modSort"></result>
+        <result column="menu_url" property="url"></result>
+    </resultMap>
+    <select id="loadMenuByUserId"  resultMap="BaseResultMap">
+        select distinct mo.module_name,me.menu_name,me.sort as msort,mo.sort,me.menu_url from sys_user su inner join pc_menu_role rm on su.position_id=su.position_id inner  join web_menu me on me.menu_id=rm.menu_id inner join web_module mo on me.module_id=mo.module_id where su.id = #{userId} order by mo.sort,me.sort
+    </select>
+</mapper>

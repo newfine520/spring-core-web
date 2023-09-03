@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itqf.spring.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.itqf.spring.entity.SysUser">
+        <result column="id" property="id"></result>
+        <result column="user_name" property="userName"></result>
+        <result column="password" property="password"></result>
+        <result column="department_id" property="departmentId"></result>
+        <result column="mobile" property="mobile"></result>
+        <result column="service_status_code" property="serviceStatusCode"></result>
+        <result column="id_card" property="idCard"></result>
+        <result column="login_status_code" property="loginStatusCode"></result>
+        <result column="sex_code" property="sexCode"></result>
+        <result column="entry_date" property="entryDate"></result>
+        <result column="rank" property="rank"></result>
+        <result column="address" property="address"></result>
+        <result column="role_code" property="roleCode"></result>
+        <result column="dispatch_type_code" property="dispatchTypeCode"></result>
+        <result column="sys_items" property="sysItems"></result>
+        <result column="parent_id" property="parentId"></result>
+        <result column="parent_name" property="parentName"></result>
+        <result column="remark" property="remark"></result>
+        <result column="is_deleted" property="isDeleted"></result>
+        <result column="create_by" property="createBy"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="position_type_code" property="positionTypeCode"></result>
+        <result column="user_no" property="userNo"></result>
+        <result column="leave_date" property="leaveDate"></result>
+        <result column="last_update_time" property="lastUpdateTime"></result>
+        <result column="last_update_by" property="lastUpdateBy"></result>
+        <result column="province_id" property="provinceId"></result>
+        <result column="city_id" property="cityId"></result>
+        <result column="district_id" property="districtId"></result>
+        <result column="entry_date_uc" property="entryDateUc"></result>
+        <result column="leave_date_propose" property="leaveDatePropose"></result>
+        <result column="check_no" property="checkNo"></result>
+        <result column="birth_date" property="birthDate"></result>
+        <result column="work_area" property="workArea"></result>
+        <result column="email" property="email"></result>
+        <result column="replace_id" property="replaceId"></result>
+        <result column="area_id" property="areaId"></result>
+        <result column="sub_area_id" property="subAreaId"></result>
+        <result column="position_id" property="positionId"></result>
+        <result column="register_address" property="registerAddress"></result>
+        <result column="ows_entry_date" property="owsEntryDate"></result>
+    </resultMap>
+    <select id="queryByUserName"  resultMap="BaseResultMap">
+        select id,user_name,password from sys_user where user_name = #{userName}
+    </select>
+    <insert id="addSysUser" parameterType="com.itqf.spring.vo.request.UserRequest">
+        <selectKey keyProperty="ur.id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sys_user(
+        user_name,
+        mobile,
+        service_status_code,
+        id_card,
+        sex_code,
+        entry_date,
+        address,
+        parent_id,
+        remark,
+        position_type_code,
+        user_no,
+        leave_date,
+        province_id,
+        city_id,
+        email,
+        area_id,
+        sub_area_id,
+        position_id,
+        register_address,
+        ows_entry_date
+        )
+        values(
+        #{ur.userName},
+        #{ur.mobile},
+        #{ur.serviceStatusCode},
+        #{ur.idCard},
+        #{ur.sexCode},
+        #{ur.entryDate},
+        #{ur.address},
+        #{ur.parentId},
+        #{ur.remark},
+        #{ur.positionTypeCode},
+        #{ur.userNo},
+        #{ur.leaveDate},
+        #{ur.provinceId},
+        #{ur.cityId},
+        #{ur.email},
+        #{ur.areaId},
+        #{ur.subAreaId},
+        #{ur.positionId},
+        #{ur.registerAddress},
+        #{ur.owsEntryDate}
+        )
+    </insert>
+<!--    <update id="updateCompanyBrand" parameterType="com.isg.springboottest.vo.request.CombrandRequest">-->
+<!--        update company_brand-->
+<!--        set   name=#{cr.name},-->
+<!--              code=#{cr.code},-->
+<!--              help_id=#{cr.helpId},-->
+<!--              msg_url=#{cr.msgUrl},-->
+<!--              manage_ulr=#{cr.manageUrl},-->
+<!--              ishanggang_code=#{cr.isgCode},-->
+<!--              wise=#{cr.wise},-->
+<!--              appKey=#{cr.appKey},-->
+<!--              secret_id=#{cr.secret},-->
+<!--              small_photo=#{cr.smallPhoto},-->
+<!--              logo_photo=#{cr.logoPhoto},-->
+<!--              theme_photo=#{cr.themePhoto}-->
+<!--        where id = #{cr.id}-->
+<!--    </update>-->
+    <!--flushCache="true"手动关闭一级缓存-->
+    <select id="sysUserList" resultMap="BaseResultMap" flushCache="true">
+        select su.id,su.user_name,su.user_no,su.sex_code,su.
+        mobile,r.name_zh as role_code,po.positionname as position_id,su.mobile,sur.user_name as parent_name,
+        (case when su.service_status_code='3000050' then '待入职' when su.service_status_code='3000010' then '在职'
+        when su.service_status_code='3000020' then '离职' when su.service_status_code='3000030' then '待离职' else '' end) as service_status_code,
+        su.register_address,su.ows_entry_date,su.entry_date,su.leave_date
+        from sys_user su left join position po on su.position_id=po.id left join role r on r.id=po.role_id left join sys_user sur on su.parent_id=sur.id where su.is_deleted=0
+        <if test="userRequest.positionId != null and userRequest.positionId.trim()!=''">
+            AND su.position_id = #{userRequest.positionId}
+        </if>
+        <if test="userRequest.userName != null and userRequest.userName.trim()!=''">
+            AND su.user_name = #{userRequest.userName}
+        </if>
+        <if test="userRequest.userNo != null and userRequest.userNo.trim()!=''">
+            AND su.user_no = #{userRequest.userNo}
+        </if>
+        <if test="userRequest.serviceStatusCode != null and userRequest.serviceStatusCode.trim()!=''">
+            AND su.service_status_code = #{userRequest.serviceStatusCode}
+        </if>
+        <if test="userRequest.roleId != null and userRequest.roleId.trim()!=''">
+            AND su.role_code = #{userRequest.roleId}
+        </if>
+<!--        <if test="userRequest.userIds!=null and userRequest.userIds.trim()!=''">-->
+<!--            AND su.id in (#{userRequest.userIds})-->
+<!--        </if>-->
+        <choose>
+            <when test="userRequest.userIds!=null and userRequest.userIds.size()>0">
+                AND su.id in
+                <foreach collection="userRequest.userIds" item="userId" index="index" open="(" close=")" separator=",">
+                    #{userId}
+                </foreach>
+            </when>
+            <otherwise>
+               AND su.id!=0
+            </otherwise>
+        </choose>
+        order by su.id
+<!--        <if test="cr.roleCode != null and cr.roleCode.trim()!=''">-->
+<!--            AND su.role_code = #{cr.roleCode}-->
+<!--        </if>-->
+    </select>
+</mapper>

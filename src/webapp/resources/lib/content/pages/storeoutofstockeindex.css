@@ -1,0 +1,350 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.stock-count-container {
+    width: 100%;
+    height: 100vh;
+    /* background-color: orange; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.stock-count-header {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    background: white;
+    margin: 0;
+    padding: 8px;
+}
+
+.header-group-btn {
+    flex: 1;
+    text-align: right;
+}
+
+.export-btn {
+    border-color: blue;
+    color: blue;
+    border-style: solid;
+    outline: none;
+    border-width: 1px;
+    height: 32px;
+    background: white;
+    cursor: pointer;
+}
+
+.stock-count-content {
+    flex-grow: 1;
+    overflow: auto;
+    height: 0;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.content-first-row {
+    display: flex;
+}
+
+.survery-item {
+    width: 33.33%;
+}
+
+.item-title {
+    height: 36px;
+    line-height: 36px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.row-height {
+    height: 100%;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 6px;
+}
+
+.row-survery {
+    width: 28%;
+}
+
+.survery-echart {
+    display: flex;
+}
+
+.row-trend {
+    width: 45%;
+    margin: 0 10px;
+}
+
+.row-sku-top {
+    width: 27%;
+    padding: 8px;
+}
+
+.sku-top-list {
+    padding: 0;
+}
+
+.list-header {
+    height: 36px;
+    display: flex;
+    line-height: 36px;
+    padding: 0 12px;
+}
+
+.sku-top-row {
+    display: flex;
+    padding: 1px 0;
+}
+
+.sku-top-content {
+    height: 196px;
+    overflow: auto;
+    padding: 0 12px;
+}
+
+.header-product,
+.header-product-title {
+    width: 70%;
+    margin: 0;
+}
+
+.header-store,
+.header-store-title {
+    width: 20%;
+    margin: 0;
+    text-align: right;
+}
+
+.header-price,
+.header-price-title {
+    width: 30%;
+    margin: 0;
+    text-align: right;
+}
+
+.header-pinlei,
+.header-pinlei-title {
+    width: 40%;
+    margin: 0;
+}
+
+.list-header .header-store-title,
+.list-header .header-product-title,
+.list-header .header-price-title,
+.list-header .header-pinlei-title {
+    font-weight: bold;
+}
+
+.content-second-row {
+    display: flex;
+    height: 330px;
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.row-rate {
+    width: 28%;
+    margin-right: 10px;
+}
+
+.row-area {
+    width: 72%;
+}
+
+.content-third-row {
+    display: flex;
+    height: 400px;
+    margin-bottom: 10px;
+}
+
+.row-analyse {
+    width: 28%;
+    margin-right: 10px;
+}
+
+.row-by-area {
+    width: 100%;
+}
+
+.row-money-rate {
+    width: 72%;
+}
+
+.area-provice-rate {
+    white-space: nowrap;
+    overflow-x: hidden;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.dashboard-province-rate {
+    /*width: calc((100% - 60px) / 3);*/
+    display: inline-block;
+    box-sizing: border-box;
+    height: 100%;
+    border: 1px d red;
+    border-radius: 8px;
+    width: 100%;
+    border-width: thin;
+    border-color: #ccc;
+    border-style: solid;
+}
+
+.province-name {
+    margin: 0;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    border-bottom-style: solid;
+    border-width: thin;
+    border-color: #ccc;
+}
+
+.province-content-list {
+    height: 200px;
+    padding: 4px 8px;
+    overflow-y: auto;
+}
+
+.list-cell {
+    display: flex;
+    padding: 2px;
+}
+
+.list-province-name {
+    margin: 0;
+    width: 20%;
+    text-align: right;
+    /*    padding: 4px 4px 0 0;*/
+    font-size: 12px;
+    white-space: pre-wrap;
+    padding-right: 4px;
+}
+
+.list-cell-item {
+    flex: 1;
+    padding: 0 0 0 2px;
+    width: 80%;
+}
+
+.cell-progress {
+    border: 1px solid #EF7483;
+    border-radius: 6px;
+    height: 15px;
+    line-height: 15px;
+    display: flex;
+    width: 80%;
+    margin-bottom: 3px;
+}
+
+.progress-rate {
+    display: inline-block;
+    background: #EF7483;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 4px;
+    height: 100%;
+}
+
+.progress-des {
+    font-size: 12px;
+}
+
+.progress-price {
+    font-size: 12px;
+    color: red;
+}
+
+.dashboard-title {
+    font-size: 18px;
+    color: black;
+}
+
+.dashboard-top-row {
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    text-align: center;
+    border-radius: 11px;
+    font-size: 12px;
+    line-height: 22px;
+    color: white;
+    margin-right: 4px;
+}
+
+.dashboard-backgroud-gray {
+    background-color: gray;
+}
+
+.dashboard-backgroud-red {
+    background-color: red;
+}
+
+.dashboard-store-count {
+    flex: 1;
+    padding-left: 20px;
+    line-height: 20px;
+}
+
+.dashboard-trend-checkbox {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.red-btn {
+    background-color: red;
+    border-radius: 5px;
+    color: white;
+    border-color: red;
+}
+
+.gray-btn {
+    background-color: #bbb;
+    border-radius: 5px;
+    color: white;
+    border-color: #bbb;
+}
+
+.badge-gray {
+    color: white !important;
+    background-color: #bbafaf !important;
+    border-color: white;
+    display: block;
+    border-style: solid;
+    border-width: 2px;
+    align-self: flex-start;
+}
+
+.badge-red {
+    color: white !important;
+    background-color: red !important;
+    border-color: white;
+    display: block;
+    border-style: solid;
+    border-width: 2px;
+    align-self: flex-start;
+}
+
+
+.roll__list li {
+    /*float: left;
+    display: block;
+    margin-right: 20px;*/
+    /* width: 100px; */
+    /*height: 100px;
+    line-height: 100px;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    color: #fff;
+    background-color: #ff9900;*/
+}

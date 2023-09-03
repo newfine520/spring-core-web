@@ -1,0 +1,198 @@
+/* 通用 */
+
+/* 字体 */
+.fontSize-14 {
+    font-size: 14px;
+}
+
+.fontSize-16 {
+    font-size: 16px;
+}
+
+.fontSize-18 {
+    font-size: 18px;
+}
+
+.fontSize-20 {
+    font-size: 20px;
+}
+/* 字体颜色 */
+.font-gray {
+    color: gray;
+}
+
+.font-red {
+    color: red;
+}
+
+.font-blue {
+    color: blue;
+}
+
+/* 文字对齐方式 */
+.textCenter {
+    text-align: center;
+}
+
+.textLeft {
+    text-align: left;
+}
+
+.textRight {
+    text-align: right;
+}
+
+/* 间距 */
+.paddingLeft-8 {
+    padding-left: 8px;
+    font-size:16px;
+}
+
+.paddingLeft-16 {
+    padding-left: 16px;
+}
+
+.paddingLeft-20 {
+    padding-left: 20px;
+}
+
+.paddingLeft-40 {
+    padding-left: 40px;
+    font-size:16px;
+}
+
+.paddingRight-8 {
+    padding-right: 8px;
+    font-size: 16px;
+}
+
+.paddingRight-16 {
+    padding-right: 16px;
+}
+
+.paddingRight-20 {
+    padding-right: 20px;
+}
+
+.paddingRight-40 {
+    padding-right: 40px;
+}
+
+.paddingTop-8 {
+    padding-top: 8px;
+}
+
+.paddingTop-16 {
+    padding-top: 16px;
+}
+
+.paddingTop-20 {
+    padding-top: 20px;
+}
+
+.paddingTop-40 {
+    padding-top: 40px;
+}
+
+.paddingBottom-8 {
+    padding-bottom: 8px;
+}
+
+.paddingBottom-16 {
+    padding-bottom: 16px;
+}
+
+.paddingBottom-20 {
+    padding-bottom: 20px;
+}
+
+.paddingBottom-40 {
+    padding-bottom: 40px;
+}
+
+.padding-8 {
+    padding: 8px;
+}
+
+.padding-16 {
+    padding: 8px;
+}
+
+.padding-20 {
+    padding: 8px;
+}
+
+.padding-40 {
+    padding: 8px;
+}
+
+.marginLeft-8 {
+  /*  margin-left: 8px;*/
+}
+
+.marginLeft-16 {
+    margin-left: 16px;
+}
+
+.marginLeft-20 {
+    margin-left: 20px;
+}
+
+.marginLeft-40 {
+    margin-left: 40px;
+}
+
+.marginRight-8 {
+    margin-right: 8px;
+}
+
+.marginRight-16 {
+    margin-right: 16px;
+}
+
+.marginRight-20 {
+    margin-right: 20px;
+}
+
+.marginRight-40 {
+    margin-right: 40px;
+}
+
+.margin-0 {
+    margin: 0;
+}
+
+.margin-8 {
+    margin: 8px;
+}
+
+.margin-16 {
+    margin: 8px;
+}
+
+.margin-20 {
+    margin: 8px;
+}
+
+.margin-40 {
+    margin: 8px;
+}
+
+/* 边框 */
+.border-dashed-red {
+    border: 1px dashed red;
+}
+
+.border-dashed-gray {
+    border: 1px dashed gray;
+}
+
+/* 圆角 */
+.border-radius {
+    border-radius: 8px;
+}
+
+/* display */
+.display-flex {
+    display: flex;
+}

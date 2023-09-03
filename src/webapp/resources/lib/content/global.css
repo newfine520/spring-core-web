@@ -1,0 +1,86 @@
+﻿.col-sm-12 {
+    margin-top: 15px;
+}
+
+.ibox-title {
+    padding: 14px 19px 7px;
+}
+
+
+.btn_right {
+    width: auto;
+    float: right;
+}
+
+.control-label {
+    font-weight: 400;
+    font-size: 12px;
+    font-family: Arial;
+}
+
+.form-group {
+    line-height: 35px;
+}
+
+.dropdown-menu-wai {
+    max-width: 54px;
+    min-width: 53px;
+}
+
+.dropdown-menu > li > a {
+    padding: 3px 12px;
+}
+
+/*table*/
+* {
+    font-family: 'Microsoft YaHei';
+}
+
+.ibox-content {
+    min-height: calc(100% - 50px) !important;
+    width: 100%
+}
+
+.cur {
+    background-color: #293846;
+    color: white !important;
+}
+
+body {
+    padding: 0px !important;
+}
+
+.hr {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+table tbody tr td {
+    font-size: 11px;
+}
+
+.dropdown-menu {
+    min-width: 108px !important;
+}
+
+.form-group {
+    margin-bottom: 2px !important;
+}
+
+.form-horizontal {
+    margin-bottom: 15px !important;
+}
+
+.img-responsive {
+    max-height: 400px !important;
+    max-width: 400px !important;
+}
+
+.img-responsive {
+    margin: 0 auto;
+}
+
+.select2-selection--multiple {
+    margin-bottom: 5px !important;
+}
+

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--启用spring的一些annotation -->
+    <context:annotation-config/>
+    <!-- 配置扫描路径-->
+    <context:component-scan base-package="com.itqf.spring">
+
+    </context:component-scan>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <!-- <constructor-arg ref="utf8Charset"/> -->
+                <!-- <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" /> -->
+                <property name="writeAcceptCharset" value="false" /><!-- 用于避免响应头过大 -->
+                <property name = "supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                        <!--                         <value>text/json;charset=UTF-8</value>    -->
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name = "supportedMediaTypes">
+                    <list>
+                        <value>text/json;charset=UTF-8</value>
+                    </list>
+                </property>
+
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+<!--     20211114springMVC允许访问资源文件-->
+<!--由于SpringMVC的前端控制器是匹配所有"/",也就是除过.jsp文件，剩下的请求类型，比如.html，都会被前端控制器拦截下来，所以无法访问，这就要设置 取消拦截 ，加上配置即可-->
+<!--在SpringMVC配置文件中加上-->
+<!--mapping 指的是拦截映射，location指的是请求的目录，按照这个格式去写就行了 -->
+
+     <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+
+
+    <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/"></property>
+        <property name="suffix" value=".html"></property>
+        <property name="templateMode" value="HTML5"></property>
+        <property name="cacheable" value="false"></property>
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+        <property name="additionalDialects">
+            <set>
+                <!-- Note the package would change to 'springsecurity3' if you are using that version -->
+                <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
+            </set>
+        </property>
+    </bean>
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+        <property name="order" value="1" />
+        <!--20211113找了一晚上的bug,麻辣隔壁,我太难了!-->
+<!--        <property name="viewNames" value="home" />-->
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
+
+    <!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/"/>
+            <mvc:exclude-mapping path="/api/**" />
+            <bean class="com.itqf.spring.logging.interceptor.VisitInfoInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

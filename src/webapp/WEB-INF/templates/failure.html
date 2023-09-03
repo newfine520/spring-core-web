@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>管理后台首页</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{resources/lib/bootstrap-3.3.1-dist/css/bootstrap.css}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        #container {
+            width: 858px;
+            height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -429px;
+            margin-top: -190px;
+        }
+        .form-group{margin-bottom:6px;}
+        form{margin-bottom:0;}
+        label{margin-bottom:2px;}
+    </style>
+</head>
+<body style="background:#2E3E4E;">
+
+<div id="container">
+    <div></div>
+    <div class="panel panel-default" style="border:none;">
+        <div class="panel-body">
+            <div class="pull-left">
+               登陆失败！
+            </div>
+            <div class="pull-right" style="width:320px;">
+                <div style="margin:0 0 15px;font-size:40px;padding:20px 0 0 10px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/resources/lib/jquery/jquery-1.11.0.min.js"></script>
+<script src="/resources/lib/bootstrap-3.3.1-dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
